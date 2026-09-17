@@ -268,8 +268,8 @@
     <div class="index-bar">
       <div class="idx"><div class="n">20</div><div class="l">Tools</div></div>
       <div class="idx"><div class="n">04</div><div class="l">Categories</div></div>
-      <div class="idx"><div class="n">09</div><div class="l">무료 / 부분무료</div></div>
-      <div class="idx"><div class="n">06</div><div class="l">공개 API</div></div>
+      <div class="idx"><div class="n">12</div><div class="l">무료 / 부분무료</div></div>
+      <div class="idx"><div class="n">04</div><div class="l">공개 API</div></div>
     </div>
   </div>
 </header>
@@ -277,11 +277,11 @@
 <div class="controls">
   <div class="wrap controls-inner">
     <div class="filters" role="group" aria-label="카테고리 필터">
-      <button class="chip" data-filter="all" aria-pressed="true">전체</button>
-      <button class="chip" data-filter="db" aria-pressed="false"><span class="dot" style="background:#2dd4a7"></span>학술 DB</button>
-      <button class="chip" data-filter="ai" aria-pressed="false"><span class="dot" style="background:#f7c14b"></span>AI 근거·검색</button>
-      <button class="chip" data-filter="poc" aria-pressed="false"><span class="dot" style="background:#f16b6b"></span>임상 의사결정</button>
-      <button class="chip" data-filter="trial" aria-pressed="false"><span class="dot" style="background:#3fb1ec"></span>임상시험·프리프린트</button>
+      <button type="button" class="chip" data-filter="all" aria-pressed="true">전체</button>
+      <button type="button" class="chip" data-filter="db" aria-pressed="false"><span class="dot" style="background:#2dd4a7"></span>학술 DB</button>
+      <button type="button" class="chip" data-filter="ai" aria-pressed="false"><span class="dot" style="background:#f7c14b"></span>AI 근거·검색</button>
+      <button type="button" class="chip" data-filter="poc" aria-pressed="false"><span class="dot" style="background:#f16b6b"></span>임상 의사결정</button>
+      <button type="button" class="chip" data-filter="trial" aria-pressed="false"><span class="dot" style="background:#3fb1ec"></span>임상시험·프리프린트</button>
     </div>
     <label class="search">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
@@ -292,7 +292,7 @@
 
 <main class="wrap" id="app"></main>
 
-<div class="wrap"><p class="empty" id="empty">일치하는 도구가 없습니다.</p></div>
+<div class="wrap"><p class="empty" id="empty" role="status" aria-live="polite">일치하는 도구가 없습니다.</p></div>
 
 <footer>
   <div class="wrap foot-grid">
@@ -302,7 +302,7 @@
     </div>
     <div class="note">
       <h4>실무 팁</h4>
-      <p>정밀·재현 검색은 <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubMed</a>(MeSH)와 Embase 조합이 표준입니다. 도구에 API로 붙일 때는 공개 API가 있는 <a href="https://www.semanticscholar.org/" target="_blank" rel="noopener">Semantic Scholar</a>와 <a href="https://europepmc.org/" target="_blank" rel="noopener">Europe PMC</a>가 가장 현실적입니다.</p>
+      <p>정밀·재현 검색은 <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener noreferrer">PubMed</a>(MeSH)와 Embase 조합이 표준입니다. 도구에 API로 붙일 때는 공개 API가 있는 <a href="https://www.semanticscholar.org/" target="_blank" rel="noopener noreferrer">Semantic Scholar</a>와 <a href="https://europepmc.org/" target="_blank" rel="noopener noreferrer">Europe PMC</a>가 가장 현실적입니다.</p>
     </div>
   </div>
 </footer>
@@ -461,7 +461,7 @@ function cardHTML(t){
   const iconHTML = logo
     ? `<span class="icon-tile wide"><img src="${logo}" alt="${t.name}"></span>`
     : `<span class="icon-tile"><img src="https://www.google.com/s2/favicons?domain=${domain}&sz=128" alt="${t.name} 아이콘" loading="lazy" referrerpolicy="no-referrer"></span>`;
-  return `<article class="card" data-cat="${t.cat}" data-txt="${(t.name+' '+t.org+' '+t.desc).toLowerCase()}" style="--g1:${cat.g1};--g2:${cat.g2};--accent:${cat.accent}">
+  return `<article class="card" data-cat="${t.cat}" data-txt="${(t.name+' '+t.org+' '+t.desc+' '+t.pros.join(' ')+' '+t.cons.join(' ')).toLowerCase()}" style="--g1:${cat.g1};--g2:${cat.g2};--accent:${cat.accent}">
     <div class="card-head">
       <span class="badge">${cat.badge}</span>
       ${iconHTML}
@@ -474,7 +474,7 @@ function cardHTML(t){
       <p class="desc">${t.desc}</p>
       <ul class="pc">${pros}${cons}</ul>
       <div class="card-foot">
-        <a class="visit" href="${t.url}" target="_blank" rel="noopener">바로가기 <span class="url">${shortUrl(t.url)}</span> →</a>
+        <a class="visit" href="${t.url}" target="_blank" rel="noopener noreferrer">바로가기 <span class="url">${shortUrl(t.url)}</span> →</a>
       </div>
     </div>
   </article>`;
